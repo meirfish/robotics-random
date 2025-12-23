@@ -1,14 +1,116 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script>
+        <style>
+            .field{
+                margin:auto;
+                width:600px;
+                height:600px;
+                background-color:white;
+                border-style:solid;
+                border-radius: 100%;
+                border-width:50px;
+                border-color:black;
+                position:relative;
+            }
 
-        </script>
+            .robot{
+                margin:auto;
+                margin-top: 38%;
+                width:150px;
+                height:150px;
+                background-color:rgb(141, 141, 141);
+                display:grid;
+                place-items:center;
+            }
+
+            .circle{
+                border-radius:100%;
+                border:5px solid black;
+                width:100px;
+                height:100px;
+            }
+
+            #c1{
+                text-align: center;
+                position:absolute;
+                background-color: black;
+                display:none;
+            }
+
+            #c2{
+                text-align: center;
+                position:absolute;
+                background-color: black;
+                display:none;
+            }
+
+            #c3{
+                text-align: center;
+                position:absolute;
+                background-color: white;
+                display:none;
+            }
+
+            #c4{
+                text-align: center;
+                position:absolute;
+                background-color: white;
+                display:none;
+            }
+        </style>
     </head>
 
     <body>
-        <h1>Кегельриң рандом</h1>
-        <button>Push me</button>
+        <h1>Кегельринг рандом</h1>
+        <div class="field" >
+            <div class="robot"><p>Робот ==></p></div>
+            <p class="circle" id="c1"></p>
+            <p class="circle" id="c2"></p>
+            <p class="circle" id="c3"></p>
+            <p class="circle" id="c4"></p>
+            <button onclick="randomise()">Араластыру</button>
+        </div>
+
+        <script>
+            function randomise(){
+                let pos = [0, 1, 2, 3, 4, 5, 6, 7];
+                let chosen = [];
+
+                for (let i = 0; i < 4; i++){
+                    a = Math.floor(Math.random() * pos.length);
+                    if (chosen.includes(pos[a])){
+                        i--;
+                    }
+                    else{
+                        chosen.push(pos[a]);
+                    }
+                }
+
+                const c1 = document.getElementById("c1");
+                const c2 = document.getElementById("c2");
+                const c3 = document.getElementById("c3");
+                const c4 = document.getElementById("c4");
+
+                c1.style.display = 'block';
+                c2.style.display = 'block';
+                c3.style.display = 'block';
+                c4.style.display = 'block';
+
+                c1.style.left = `${250 + (200 * (Math.sin(0 + Math.PI/4 * chosen[0])))}px`;
+                c1.style.top = `${250 + (200 * (Math.cos(0 + Math.PI/4 * chosen[0])))}px`;
+
+                c2.style.left = `${250 + (200 * (Math.sin(0 + Math.PI/4 * chosen[1])))}px`;
+                c2.style.top = `${250 + (200 * (Math.cos(0 + Math.PI/4 * chosen[1])))}px`;
+
+                c3.style.left = `${250 + (200 * (Math.sin(0 + Math.PI/4 * chosen[2])))}px`;
+                c3.style.top = `${250 + (200 * (Math.cos(0 + Math.PI/4 * chosen[2])))}px`;
+
+                c4.style.left = `${250 + (200 * (Math.sin(0 + Math.PI/4 * chosen[3])))}px`;
+                c4.style.top = `${250 + (200 * (Math.cos(0 + Math.PI/4 * chosen[3])))}px`;
+            }
+        </script>
+
     </body>
 
     <foot>
