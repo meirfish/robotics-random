@@ -58,18 +58,26 @@
                 background-color: white;
                 display:none;
             }
+
+            #action{
+                position:relative;
+                margin-left:64%;
+
+            }
         </style>
     </head>
 
     <body>
         <h1>Кегельринг рандом</h1>
-        <div class="field" >
-            <div class="robot"><p>Робот ==></p></div>
-            <p class="circle" id="c1"></p>
-            <p class="circle" id="c2"></p>
-            <p class="circle" id="c3"></p>
-            <p class="circle" id="c4"></p>
-            <button onclick="randomise()">Араластыру</button>
+        <div>
+            <div class="field" >
+                <div class="robot"><p>Робот ==></p></div>
+                <p class="circle" id="c1"></p>
+                <p class="circle" id="c2"></p>
+                <p class="circle" id="c3"></p>
+                <p class="circle" id="c4"></p>
+            </div>
+            <button class="button" id="action" onclick="randomise()">Араластыру</button>
         </div>
 
         <script>
