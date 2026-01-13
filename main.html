@@ -25,20 +25,15 @@
             }
 
             .circle {
-            border-radius: 50%;
-            border: 5px solid black;
-            position: absolute;
-            width: 100px;
-            height: 100px;
-        }
-
-        .circle-white { background: white; }
-        .circle-black { background: black; }
-
-            #action{
-                position:relative;
-                margin-left:64%;
+                border-radius: 50%;
+                border: 5px solid black;
+                position: absolute;
+                width: 100px;
+                height: 100px;
             }
+
+            .circle-white { background: white; }
+            .circle-black { background: black; }
         </style>
     </head>
 
@@ -49,37 +44,58 @@
                 <div class="robot" id="robot"><p>Робот ==></p></div>
                 <p id="orient"></p>
             </div>
-            <button class="button" id="action" onclick="randomise()">Араластыру</button>
-            <label>Кеглі саны:</label>
-            <input type="number" id="amount" value="4" min="1" max="8" onchange="limit()">
-            <label>Қаралар саны:</label>
-            <input type="number" id="blacks" value="1" min="0" max="4">
+            <div style="position:relative; margin-left:64%;">
+                <button class="button" id="shuffle" onclick="randomise()">Араластыру</button>
+                <button class="button" id="reset" onclick="reset()">Тазарту</button><br>
+                <label>Кеглі саны:</label>
+                <input type="number" id="amount" value="4" min="1" max="8" onchange="limit()"><br>
+                <label>Қаралар саны:</label>
+                <input type="number" id="blacks" value="2" min="0" max="4" onchange="limit()">
+            </div>
         </div>
 
         <script>
             function limit(){
-                let total = document.getElementById("amount");
+                let amount = document.getElementById("amount");
                 let black = document.getElementById("blacks");
-                
-                if (black.value > total.value){
-                    black.value = total.value;
+
+                if (!(amount.value >= '0' && amount.value <= '9') || !(black.value >= '0' && black.value <= '9')){
+                    window.alert("Сан жазу керек.");
+                    reset();
                 }
 
-                black.max=total.value;
+                if (amount.value < 0){amount.value = 0;}
+                if (amount.value > 8){amount.value = 8;}
+
+                if (black.value > amount.value){black.value = amount.value;}
+                if (black.value < 0){black.value = 0;}
+
+                black.max = amount.value;
+            }
+
+            function clear(){
+                [...document.getElementById("field").getElementsByClassName('circle')].forEach(e => e.remove());
+            }
+
+            function reset(){
+                clear();
+                document.getElementById("amount").value = 4;
+                document.getElementById("blacks").value = 2;
+                document.getElementById("blacks").max = 4;
             }
 
             function randomise(){
-                const black = document.getElementById("blacks").value;
-                const amount = document.getElementById("amount").value;
+                const black = document.getElementById("blacks");
+                const amount = document.getElementById("amount");
                 const parent = document.getElementById("field");
                 const before = document.getElementById("robot");
 
-                [...parent.getElementsByClassName('circle')].forEach(e => e.remove());
+                clear();
 
                 let pos = Array.from({ length: 8 }, (_, i) => i);
                 let chosen = [];
 
-                for (let i = 0; i < amount; i++) {
+                for (let i = 0; i < amount.value; i++) {
                     let a;
                     do { a = Math.floor(Math.random() * pos.length); }
                     while (chosen.includes(pos[a]));
@@ -87,7 +103,7 @@
                 }
 
                 chosen.forEach((i, idx) => {
-                    const isBlack = idx < black;
+                    const isBlack = idx < black.value;
                     const circle = document.createElement("p");
                     circle.classList.add("circle", isBlack ? "circle-black" : "circle-white");
                     circle.style.left = `${250 + 200 * Math.sin(Math.PI / 4 * i)}px`;
