@@ -58,17 +58,19 @@
             function limit(){
                 let amount = document.getElementById("amount");
                 let black = document.getElementById("blacks");
+                let amountNum = Number(amount.value);
+                let blackNum = Number(black.value);
 
                 if (!(amount.value >= '0' && amount.value <= '9') || !(black.value >= '0' && black.value <= '9')){
                     window.alert("Сан жазу керек.");
                     reset();
                 }
 
-                if (amount.value < 0){amount.value = 0;}
-                if (amount.value > 8){amount.value = 8;}
+                if (amountNum < 0){amount.value = 0;}
+                if (amountNum > 8){amount.value = 8;}
 
-                if (black.value > amount.value){black.value = amount.value;}
-                if (black.value < 0){black.value = 0;}
+                if (blackNum > amountNum){black.value = amount.value;}
+                if (blackNum < 0){black.value = 0;}
 
                 black.max = amount.value;
             }
@@ -115,7 +117,9 @@
 
     </body>
 
-    <foot>
-
-    </foot>
+    <footer>
+        <p>Шын жүректен: Ақтөбеден</p>
+        <p>meirfish (Мейіржан Ерсайын)</p>
+        <p><a href="mailto:yersainmeirjan@gmail.com">yersainmeirjan@gmail.com</a></p>
+    </footer>
 </html>
