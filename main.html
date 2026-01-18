@@ -66,6 +66,11 @@
                     reset();
                 }
 
+                if (!(amountNum === Math.floor(amountNum)) || !(blackNum === Math.floor(blackNum))){
+                    window.alert("Бүтін сан жазу керек.");
+                    reset();
+                }
+
                 if (amountNum < 0){amount.value = 0;}
                 if (amountNum > 8){amount.value = 8;}
 
